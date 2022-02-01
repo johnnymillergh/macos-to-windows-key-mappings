@@ -16,6 +16,9 @@
 ; Pasting
 #v::Send ^v
 
+; Paste without formatting with ⌘ + shift + v
+#+v::Send ^+v
+
 ; Cutting
 #x::Send ^x
 

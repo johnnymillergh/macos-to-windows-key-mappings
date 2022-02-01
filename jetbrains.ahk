@@ -1,3 +1,7 @@
+; --------------------------------------------------------------
+; JetBrains Specificications
+; This mappings also work with Visual Studio Code with the plugin "IntelliJ IDEA Keybindings"
+; --------------------------------------------------------------
 #If WinActive("ahk_exe idea64.exe") or WinActive("ahk_exe datagrip64.exe") or WinActive("ahk_exe webstorm64.exe")or WinActive("ahk_exe Code.exe")
 ; Auto-complementation current line and return new line
 #+Enter::^+Enter
