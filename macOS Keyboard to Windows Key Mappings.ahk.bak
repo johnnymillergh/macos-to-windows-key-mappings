@@ -1,0 +1,377 @@
+﻿;-----------------------------------------
+; macOS Keyboard to Windows Key Mappings
+;=========================================
+
+; --------------------------------------------------------------
+; NOTES
+; --------------------------------------------------------------
+; ! = ALT/options
+; ^ = CTRL
+; + = SHIFT
+; # = WIN/⌘
+;
+; Debug action snippet: MsgBox You pressed Control-A while Notepad is active.
+
+;#InstallKeybdHook
+#SingleInstance force
+SetTitleMatchMode 2
+SendMode Input
+
+; --------------------------------------------------------------
+; Mac-like screenshots in Windows (requires Windows 10 Snip & Sketch)
+; --------------------------------------------------------------
+; Capture entire screen with ⌘/WIN + SHIFT + 3
+;#+3::send #{PrintScreen}
+
+; Capture portion of the screen with ⌘/WIN + SHIFT + 4
+;#+4::#+s
+
+; --------------------------------------------------------------
+; media/function keys all mapped to the right option key
+; --------------------------------------------------------------
+;RAlt & F7::SendInput {Media_Prev}
+;RAlt & F8::SendInput {Media_Play_Pause}
+;RAlt & F9::SendInput {Media_Next}
+;F10::SendInput {Volume_Mute}
+;F11::SendInput {Volume_Down}
+;F12::SendInput {Volume_Up}
+
+; swap left ⌘/WIN with left alt
+;LWin::LAlt
+;LAlt::LWin ; add a semicolon in front of this line if you want to disable the WIN key
+
+; Remap Windows + Left OR Right to enable previous or next web page
+; Use only if swapping left ⌘/WIN key with left alt
+;Lwin & Left::Send !{Left}
+;Lwin & Right::Send !{Right}
+
+; Eject Key
+;F20::SendInput {Insert} ; F20 doesn't show up on AHK anymore, see #3
+
+; F13-15, standard Windows mapping
+;F13::SendInput {PrintScreen}
+;F14::SendInput {ScrollLock}
+;F15::SendInput {Pause}
+
+;F16-19 custom app launchers, see http://www.autohotkey.com/docs/Tutorial.htm for usage info
+;F16::Run https://twitter.com
+;F17::Run https://linkedin.com
+;F18::Run https://www.reddit.com
+;F19::Run https://facebook.com
+
+; --------------------------------------------------------------
+; OS X system shortcuts
+; --------------------------------------------------------------
+; Saving. Make ctrl + s work with ⌘ + s
+#s::Send ^s
+
+; Selecting
+#a::Send ^a
+
+; Delete current line with ⌘ + delete
+#Backspace::Send ^{Backspace}
+
+; Copying
+#c::Send ^c
+
+; Pasting
+#v::Send ^v
+
+; Cutting
+#x::Send ^x
+
+; Opening
+#o::Send ^o
+
+; Finding
+#f::Send ^f
+
+; Replace / Reload
+#r::Send ^r
+
+; Undo
+#z::Send ^z
+
+; Redo
+#y::Send ^y
+
+; New tab
+#t::Send ^t
+
+; Close tab
+#w::Send ^w
+
+; Close window (⌘ + q to Alt + F4)
+#q::Send !{F4}
+
+; Remap Windows + Tab to Alt + Tab.
+Lwin & Tab::AltTab
+
+; Minimize window
+#m::WinMinimize,a
+
+; Create new folder with ⌘ + shift + n
+#+n::Send ^+n
+
+; --------------------------------------------------------------
+; OS X keyboard mappings for special chars
+; --------------------------------------------------------------
+; Map Alt + L to @
+;!l::SendInput {@}
+
+; Map Alt + N to \
+;+!7::SendInput {\}
+
+; Map Alt + N to ©
+;!g::SendInput {©}
+
+; Map Alt + o to ø
+;!o::SendInput {ø}
+
+; Map Alt + 5 to [
+;!5::SendInput {[}
+
+; Map Alt + 6 to ]
+;!6::SendInput {]}
+
+; Map Alt + E to €
+;!e::SendInput {€}
+
+; Map Alt + - to –
+;!-::SendInput {–}
+
+; Map Alt + 8 to {
+;!8::SendInput {{}
+
+; Map Alt + 9 to }
+;!9::SendInput {}}
+
+; Map Alt + - to ±
+;!+::SendInput {±}
+
+; Map Alt + R to ®
+;!r::SendInput {®}
+
+; Map Alt + N to |
+;!7::SendInput {|}
+
+; Map Alt + W to ∑
+;!w::SendInput {∑}
+
+; Map Alt + N to ~
+;!n::SendInput {~}
+
+; Map Alt + 3 to #
+;!3::SendInput {#}
+
+; --------------------------------------------------------------
+; Custom mappings for special chars
+; --------------------------------------------------------------
+;#ö::SendInput {[}
+;#ä::SendInput {]}
+;^ö::SendInput {{}
+;^ä::SendInput {}}
+
+; --------------------------------------------------------------
+; Google Chrome Specificications
+; --------------------------------------------------------------
+#If WinActive("ahk_exe chrome.exe")
+; Show Web Developer Tools with ⌘ + alt + i
+#!i::Send {F12}
+
+; Select an element with ⌘ + shift + c
+#+c::Send ^+c
+
+; Show source code with ⌘ + alt + u
+#!u::Send ^u
+
+; Restore web page with ⌘ + shift + t
+#+t::Send ^+t
+
+; Select an element in the page and inspect it with alt + shift + c
+!+c::Send ^+c
+
+; Switch to tab 1 with ⌘ + 1
+#1::Send ^1
+
+; Switch to tab 2 with ⌘ + 2
+#2::Send ^2
+
+; Switch to tab 3 with ⌘ + 3
+#3::Send ^3
+
+; Switch to tab 4 with ⌘ + 4
+#4::Send ^4
+
+; Switch to tab 5 with ⌘ + 5
+#5::Send ^5
+
+; Switch to tab 6 with ⌘ + 6
+#6::Send ^6
+#If
+
+; --------------------------------------------------------------
+; JetBrains Specificications
+; This mappings also work with Visual Studio Code with the plugin "IntelliJ IDEA Keybindings"
+; --------------------------------------------------------------
+#If WinActive("ahk_exe idea64.exe") or WinActive("ahk_exe datagrip64.exe") or WinActive("ahk_exe webstorm64.exe")or WinActive("ahk_exe Code.exe")
+; Auto-complementation current line and return new line
+#+Enter::^+Enter
+
+; Globally find with ⌘ + shift + f
+#+f::Send ^+f
+
+; Globally replace with ⌘ + shift + r
+#+r::Send ^+r
+
+; Code formatting with ⌘ + alt + l
+#!l::Send ^!l
+
+; Go into the code with ⌘ + LeftClick
+#LButton::Send ^{LButton}
+
+; Go into the implementation with ⌘ + alt + LeftClick
+#!LButton::Send ^!{LButton}
+
+; Accept value with type with ⌘ + alt + v
+#!v::Send ^!v
+
+; Copy current line with ⌘ + d
+#d::Send ^d
+
+; Delete current line with ⌘ + backspace
+#Backspace::Send ^y
+
+; Comment current line with ⌘ + /
+#/::Send ^/
+
+; Comment multiple lines with ⌘ + shift + /
+#+/::Send ^+/
+
+; Optimize imports with alt + shift + o, seems like all platforms have the same shortcut, which is control + alt + o
+;!+o::Send ^!o
+
+; Git commit with ⌘ + k
+#k::Send ^k
+
+; Git push with ⌘ + shift + k
+#+k::Send ^+k
+
+; Git pull with ⌘ + t
+#t::Send ^t
+
+; Close editor's tab with ⌘ + w
+#w::Send ^{F4}
+
+; Open Settings with ⌘ + .
+#,::Send ^!s
+
+; Collapse with ⌘ + -
+#-::Send ^-
+
+; Expand with ⌘ + +，this shortcut is not working on Windows, confecting with the application ("C:\Windows\System32\Magnify.exe")
+#+::Send ^+
+
+; Collapse all with ⌘ + -
+#+-::Send ^+-
+
+; Expand all with ⌘ + +
+#++::Send ^+{+}
+
+; Previous with ⌘ + left
+#Left::Send ^!{Left}
+
+; Previous with ⌘ + right
+#Right::Send ^!{Right}
+
+; Recent files with ⌘ + e
+#e::Send ^e
+
+; Split line, submit, execute SQL with ⌘ + enter
+#Enter::Send, ^{Enter}
+
+; Highlight current scope with ⌘ + RightClick
+#RButton::Send ^{RButton}
+
+; Move statement up with ⌘ + shift + up
+#+Up::Send ^+{Up}
+
+; Move statement down with ⌘ + shift + down
+#+Down::Send ^+{Down}
+
+; Code generation with ctrl + enter, FIXME: doesn't work properly
+; ^Enter::Send !{Ins}
+
+; Copy class name or method reference with ⌘ + shift + alt + c
+#+!c::Send ^+!c
+
+; Surround / with ⌘ + alt + t
+#+t::Send ^+t
+
+; Toggle case with ⌘ + shift + u
+#+u::Send ^+u
+#If
+
+; --------------------------------------------------------------
+; Typora Specificications
+; --------------------------------------------------------------
+#If WinActive("ahk_exe Typora.exe")
+; New with ⌘ + n
+#n::Send ^n
+
+; Paragraph
+; Heading 1 to 6 with ⌘ + 1 to 6
+#1::Send ^1
+#2::Send ^2
+#3::Send ^3
+#4::Send ^4
+#5::Send ^5
+#6::Send ^6
+; Paragraph with ⌘ + o
+#o::Send ^o
+; Table with ⌘ + alt +t
+#!t::Send ^t
+; Code Fences with ⌘ + alt + c
+#!c::Send ^+k
+; Quote with ⌘ + alt + q
+#!q::Send ^+q
+; Ordered List with ⌘ + alt + o
+#!o::Send ^+o
+; Unordered List with ⌘ + alt + u
+#!u::Send ^+u
+
+; Format
+; Strong with ⌘ + b
+#b::Send ^b
+; Emphasis with ⌘ + i
+#i::Send ^i
+; Underline with ⌘ + u
+#u::Send ^u
+; Code with ⌘ + shift + `
+#+Del::Send ^+{Del}
+; Strikethrough with ⌘ + shift + `
+#^Del::Send ^+5
+; Hyperlink with ⌘ + k
+#k::Send ^k
+; Image with ⌘ + ctrl + i
+#^i::Send ^+i
+
+; View
+; Source Code Mode with ⌘ + /
+#/::Send ^/
+
+#If
+
+; --------------------------------------------------------------
+; WeChat, WeCom, Teams Specificications
+; --------------------------------------------------------------
+#If WinActive("ahk_class WeChatMainWndForPC") or WinActive("ahk_exe WXWork.exe") or WinActive("ahk_exe Teams.exe") or WinActive("ahk_exe Slack.exe")
+; Send message with ⌘ + enter
+#Enter::Send, ^{Enter}
+
+; Minimize window with ⌘ + w
+#w::WinMinimize,a
+
+; Paste without formatting with ⌘ + shift + v
+#+v::Send ^+v
+#If
