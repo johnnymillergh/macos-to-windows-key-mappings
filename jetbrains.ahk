@@ -94,7 +94,7 @@
 #+!c::Send ^+!c
 
 ; Surround / with ⌘ + alt + t
-#+t::Send ^+t
+#!t::Send ^!t
 
 ; Toggle case with ⌘ + shift + u
 #+u::Send ^+u
