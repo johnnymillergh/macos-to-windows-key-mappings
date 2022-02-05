@@ -34,4 +34,7 @@
 
 ; Switch to tab 6 with ⌘ + 6
 #6::Send ^6
+
+; Print the current page with ⌘ + p
+#p::Send ^p
 #If
