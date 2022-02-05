@@ -22,9 +22,9 @@
 ; Quote with ⌘ + alt + q
 #!q::Send ^+q
 ; Ordered List with ⌘ + alt + o
-#!o::Send ^+o
+#!o::Send ^+[
 ; Unordered List with ⌘ + alt + u
-#!u::Send ^+u
+#!u::Send ^+]
 
 ; Format
 ; Strong with ⌘ + b
