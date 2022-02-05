@@ -42,8 +42,8 @@ SendMode Input
 
 ; Remap Windows + Left OR Right to enable previous or next web page
 ; Use only if swapping left ⌘/WIN key with left alt
-;Lwin & Left::Send !{Left}
-;Lwin & Right::Send !{Right}
+Lwin & Left::Send !{Left}
+Lwin & Right::Send !{Right}
 
 ; Eject Key
 ;F20::SendInput {Insert} ; F20 doesn't show up on AHK anymore, see #3
