@@ -1,56 +1,66 @@
 ; --------------------------------------------------------------
 ; macOS Common Shortcuts
+; https://support.apple.com/en-us/HT201236
 ; --------------------------------------------------------------
-; Saving. Make ctrl + s work with ⌘ + s
+; Saving with ⌘ + s
 #s::Send ^s
 
-; Selecting
+; Selecting with ⌘ + a
 #a::Send ^a
 
 ; Delete current line with ⌘ + delete
 #Backspace::Send ^{Backspace}
 
-; Copying
+; Copying with ⌘ + c
 #c::Send ^c
 
-; Pasting
+; Pasting with ⌘ + v
 #v::Send ^v
 
 ; Paste without formatting with ⌘ + shift + v
 #+v::Send ^+v
 
-; Cutting
+; Cutting with ⌘ + x
 #x::Send ^x
 
-; Opening
+; Opening with ⌘ + o
 #o::Send ^o
 
-; Finding
+; Finding with ⌘ + f
 #f::Send ^f
 
-; Replace / Reload
+; Replace / Reload with ⌘ + r
 #r::Send ^r
 
-; Undo
+; Undo with ⌘ + z
 #z::Send ^z
 
-; Redo
+; Redo with ⌘ + y
 #y::Send ^y
 
-; New tab
+; New tab with ⌘ + t
 #t::Send ^t
 
-; Close tab
+; Close tab with ⌘ + w
 #w::Send ^w
 
-; Close window (⌘ + q to Alt + F4)
+; Close window with ⌘ + q
 #q::Send !{F4}
 
 ; Remap Windows + Tab to Alt + Tab.
 Lwin & Tab::AltTab
 
-; Minimize window
+; Minimize window with ⌘ + m
 #m::WinMinimize,a
+
+; --------------------------------------------------------------
+; Mac-like screenshots in Windows (requires Windows 10 Snip & Sketch)
+; --------------------------------------------------------------
+; Capture entire screen with ⌘ + shift + 3. F1 is the shortcut for Snipaste
+#+3::send {F1}
+
+; Capture portion of the screen with ⌘ + shift + 4
+;#+4::#+s
 
 ; --------------------------------------------------------------
 ; OS X keyboard mappings for special chars
