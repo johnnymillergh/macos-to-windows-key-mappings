@@ -67,10 +67,10 @@
 #++::Send ^+{+}
 
 ; Previous with ⌘ + left
-#Left::Send ^!{Left}
+#!Left::Send, ^!{Left}
 
-; Previous with ⌘ + right
-#Right::Send ^!{Right}
+; Next with ⌘ + right
+#!Right::Send, ^!{Right}
 
 ; Recent files with ⌘ + e
 #e::Send ^e
@@ -88,7 +88,7 @@
 #+Down::Send ^+{Down}
 
 ; Code generation with ctrl + enter, FIXME: doesn't work properly
-; ^Enter::Send !{Ins}
+^Enter::Send !{Ins}
 
 ; Copy class name or method reference with ⌘ + shift + alt + c
 #+!c::Send ^+!c

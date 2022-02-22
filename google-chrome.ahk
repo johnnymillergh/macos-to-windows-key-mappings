@@ -37,4 +37,7 @@
 
 ; Print the current page with ⌘ + p
 #p::Send ^p
+
+; Chrome extension: https://github.com/alyssaxuu/omni with ⌘ + shift + k
+#+k::Send ^+k
 #If
