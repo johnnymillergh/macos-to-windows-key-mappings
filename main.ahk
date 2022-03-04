@@ -77,3 +77,8 @@ Lwin & Right::Send !{Right}
 ; IM app (WeChat, WeCom, Teams) Specificications
 ; --------------------------------------------------------------
 #Include %A_ScriptDir%\im.ahk
+
+; --------------------------------------------------------------
+; Windows Terminal Specificications
+; --------------------------------------------------------------
+#Include %A_ScriptDir%\windows-terminal.ahk

@@ -6,7 +6,8 @@ AutoHotkey script `main.ahk` is the entrance of the program, which maps macOS ke
 - JetBrains keyboard shortcuts
 - Typora keyboard shortcuts
 - Google Chrome keyboard shortcuts
-- The keyboard shortcuts for instant message apps like Microsoft Teams, WeChat
+- The keyboard shortcuts for instant message apps like Microsoft Teams, WeChat, Slack, Lark
+- Windows Terminal keyboard shortcuts
 - And much more Windows apps to be supported
 
 This repository is based on former gist [`johnnymillergh/macOS Keyboard to Windows Key Mappings.ahk`](https://gist.github.com/johnnymillergh/7df327476e1953e233827d88c823bfc8).
