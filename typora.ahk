@@ -25,6 +25,8 @@
 #!o::Send ^+[
 ; Unordered List with ⌘ + alt + u
 #!u::Send ^+]
+; Task list with ⌘ + alt + x
+#!x::Send ^+x
 
 ; Format
 ; Strong with ⌘ + b
