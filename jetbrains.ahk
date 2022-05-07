@@ -102,4 +102,13 @@ or WinActive("ahk_exe Code.exe")
 
 ; Toggle case with ⌘ + shift + u
 #+u::Send ^+u
+
+; Type hierachy with ⌘ + h
+#h::Send ^h
+
+; Method hierarchy with ⌘ + shift + h
+#+h::Send ^+h
+
+; Call hierarchy with ⌘ + alt + h
+#!h::Send ^!h
 #If
