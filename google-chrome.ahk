@@ -40,4 +40,7 @@
 
 ; Chrome extension: https://github.com/alyssaxuu/omni with ⌘ + shift + k
 #+k::Send ^+k
+
+; Open an incognito window with ⌘ + Shift + n
+#+n::Send ^+n
 #If
