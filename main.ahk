@@ -53,37 +53,12 @@ Lwin & Right::Send !{Right}
 ;F19::Run https://facebook.com
 
 ; --------------------------------------------------------------
-; macOS System Shortcuts
+; Include .ahk file
 ; --------------------------------------------------------------
 #Include %A_ScriptDir%\macos-common.ahk
-
-; --------------------------------------------------------------
-; Google Chrome Specificications
-; --------------------------------------------------------------
 #Include %A_ScriptDir%\google-chrome.ahk
-
-; --------------------------------------------------------------
-; JetBrains Specificications
-; This mappings also work with Visual Studio Code with the plugin "IntelliJ IDEA Keybindings"
-; --------------------------------------------------------------
 #Include %A_ScriptDir%\jetbrains.ahk
-
-; --------------------------------------------------------------
-; Obsidian Specificications
-; --------------------------------------------------------------
 #Include %A_ScriptDir%\obsidian.ahk
-
-; --------------------------------------------------------------
-; Typora Specificications
-; --------------------------------------------------------------
 #Include %A_ScriptDir%\typora.ahk
-
-; --------------------------------------------------------------
-; IM app (WeChat, WeCom, Teams) Specificications
-; --------------------------------------------------------------
 #Include %A_ScriptDir%\im.ahk
-
-; --------------------------------------------------------------
-; Windows Terminal Specificications
-; --------------------------------------------------------------
 #Include %A_ScriptDir%\windows-terminal.ahk
