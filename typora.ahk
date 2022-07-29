@@ -35,7 +35,7 @@
 #i::Send ^i
 ; Underline with ⌘ + u
 #u::Send ^u
-; Code with ⌘ + shift + `
+; Code with ⌘ + shift + `, FIXME: this doesn't work well
 #+Del::Send ^+{Del}
 ; Strikethrough with ⌘ + shift + `
 #^Del::Send ^+5

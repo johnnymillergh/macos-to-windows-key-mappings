@@ -69,6 +69,11 @@ Lwin & Right::Send !{Right}
 #Include %A_ScriptDir%\jetbrains.ahk
 
 ; --------------------------------------------------------------
+; Obsidian Specificications
+; --------------------------------------------------------------
+#Include %A_ScriptDir%\obsidian.ahk
+
+; --------------------------------------------------------------
 ; Typora Specificications
 ; --------------------------------------------------------------
 #Include %A_ScriptDir%\typora.ahk
