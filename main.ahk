@@ -62,3 +62,4 @@ Lwin & Right::Send !{Right}
 #Include %A_ScriptDir%\typora.ahk
 #Include %A_ScriptDir%\im.ahk
 #Include %A_ScriptDir%\windows-terminal.ahk
+#Include %A_ScriptDir%\postman.ahk

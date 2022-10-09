@@ -6,7 +6,10 @@
 #t::Send ^+t
 
 ; Close tab with ⌘ + w
-#w::Send ^+w
+#w::Send ^w
 
 ; Find with ⌘ + f
 #f::Send ^+f
+
+; Open Command Palette with ⌘ + shift + p
+#+p::Send ^+p
