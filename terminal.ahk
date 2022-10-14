@@ -13,3 +13,16 @@
 
 ; Open Command Palette with ⌘ + shift + p
 #+p::Send ^+p
+
+; Open Windows PowerShell with ⌘ + 1
+#1::Send ^+1
+
+; Open Ubuntu with ⌘ + 2
+#2::Send ^+2
+
+; Open Git Bash with ⌘ + 3
+#3::Send ^+3
+
+; Open Command Prompt with ⌘ + 4
+#4::Send ^+4
+#If

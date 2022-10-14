@@ -2,7 +2,6 @@
 ; Postman Specificications
 ; --------------------------------------------------------------
 #If WinActive("ahk_exe Postman.exe")
-
 ; Request
 ; Send Request with ⌘ + enter
 #Enter::Send ^Enter
@@ -14,5 +13,4 @@
 #/::Send ^/
 ; Search with ⌘ + k
 #k::Send ^k
-
 #If
