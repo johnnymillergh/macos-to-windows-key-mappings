@@ -7,6 +7,10 @@
 
 ; Open command palette with ⌘ + p
 #p::Send ^p
+; Search current file
+#f::Send ^f
+; Search in all files
+#+f::Send ^+f
 
 ; --------------------- Paragraph Section ----------------------
 ; Plugin https://github.com/ryjjin/Obsidian-shortcuts-extender
