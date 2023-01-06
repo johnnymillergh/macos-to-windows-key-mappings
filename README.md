@@ -2,6 +2,7 @@
 
 [AutoHotkey](https://www.autohotkey.com/) script `main.ahk` is the entrance of the program, which maps macOS keyboard shortcuts to Windows platform. Here is the main functions including:
 
+- Based on the latest AutoKotkey - [![](https://img.shields.io/badge/AutoHotKey-v2.0.2-informational?style=flat&logo=autohotkey&logoColor=white&color=2bbc8a)](https://github.com/AutoHotkey/AutoHotkey/releases/tag/v2.0.2).
 - Common text or file editing keyboard shortcuts.
 - JetBrains keyboard shortcuts (also works with Visual Studio Code's plugin `IntelliJ IDEA Keybindings`).
 - Typora keyboard shortcuts.
