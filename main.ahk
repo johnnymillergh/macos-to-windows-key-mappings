@@ -14,10 +14,10 @@
 ; MsgBox, 4, , 4-parameter method: this MsgBox will time out in 5 seconds.  Continue?, 5
 ; --------------------------------------------------------------
 
-#InstallKeybdHook
+InstallKeybdHook()
 #SingleInstance force
-SetTitleMatchMode 2
-SendMode Input
+SetTitleMatchMode(2)
+SendMode("Input")
 
 ; --------------------------------------------------------------
 ; media/function keys all mapped to the right option key
@@ -35,11 +35,11 @@ SendMode Input
 
 ; Remap Windows + Left OR Right to enable previous or next web page
 ; Use only if swapping left ⌘/WIN key with left alt
-Lwin & Left::Send !{Left}
-Lwin & Right::Send !{Right}
+Lwin & Left::Send("!{Left}")
+Lwin & Right::Send("!{Right}")
 
 ; Eject Key
-;F20::SendInput {Insert} ; F20 doesn't show up on AHK anymore, see #3
+;F20::SendInput("{Insert}") ; F20 doesn't show up on AHK anymore, see #3
 
 ; F13-15, standard Windows mapping
 ;F13::SendInput {PrintScreen}
@@ -55,11 +55,11 @@ Lwin & Right::Send !{Right}
 ; --------------------------------------------------------------
 ; Include .ahk file
 ; --------------------------------------------------------------
-#Include %A_ScriptDir%\macos-common.ahk
-#Include %A_ScriptDir%\google-chrome.ahk
-#Include %A_ScriptDir%\jetbrains.ahk
-#Include %A_ScriptDir%\obsidian.ahk
-#Include %A_ScriptDir%\typora.ahk
-#Include %A_ScriptDir%\im.ahk
-#Include %A_ScriptDir%\terminal.ahk
-#Include %A_ScriptDir%\postman.ahk
+#Include "%A_ScriptDir%\macos-common.ahk"
+#Include "%A_ScriptDir%\google-chrome.ahk"
+#Include "%A_ScriptDir%\jetbrains.ahk"
+#Include "%A_ScriptDir%\obsidian.ahk"
+#Include "%A_ScriptDir%\typora.ahk"
+#Include "%A_ScriptDir%\im.ahk"
+#Include "%A_ScriptDir%\terminal.ahk"
+#Include "%A_ScriptDir%\postman.ahk"
