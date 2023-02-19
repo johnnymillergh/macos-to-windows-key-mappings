@@ -11,7 +11,7 @@
 - Windows Terminal keyboard shortcuts.
 - And much more Windows apps to be supported.
 
-This repository is based on former gist [`johnnymillergh/macOS Keyboard to Windows Key Mappings.ahk`](https://gist.github.com/johnnymillergh/7df327476e1953e233827d88c823bfc8).
+This repository is based on the former gist [`johnnymillergh/macOS Keyboard to Windows Key Mappings.ahk`](https://gist.github.com/johnnymillergh/7df327476e1953e233827d88c823bfc8).
 
 ## Usage
 
@@ -20,11 +20,24 @@ This repository is based on former gist [`johnnymillergh/macOS Keyboard to Windo
 2. Clone or download this project.
 
    ```sh
-   $ git clone https://github.com/johnnymillergh/macos-to-windows-key-mappings.git
+   $ git clone https://github.com/johnnymillergh/macos-to-windows-key-mappings.git -b main
    ```
 
 3. Double click on `main.ahk` file to run.
 
 ## Auto Start after Windows Startup
 
-Place `main.ahk` file (or make a shortcut) at `C:\Users\<USERNAME>\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`
+Place `main.ahk` file (or make a shortcut) at one of these options:
+
+- For all users, `C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup`
+- For current user,  `C:\Users\<USERNAME>\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`
+
+## Credits
+
+The [AutoHotKey v1 to v2 conversion](https://github.com/johnnymillergh/macos-to-windows-key-mappings/commit/f79de202bc04400bf657df58763cec66ab482bac) was implemented with [mmikeww/AHK-v2-script-converter](https://github.com/mmikeww/AHK-v2-script-converter).
+
+## License
+
+[Apache License](https://github.com/johnnymillergh/macos-to-windows-key-mappings/blob/main/LICENSE) © Johnny Miller
+
+2023 - Present
