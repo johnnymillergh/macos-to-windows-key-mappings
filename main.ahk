@@ -56,6 +56,7 @@ Lwin & Right::Send("!{Right}")
 ; Include .ahk file
 ; --------------------------------------------------------------
 #Include "%A_ScriptDir%\macos-common.ahk"
+#Include "%A_ScriptDir%\windows.ahk"
 #Include "%A_ScriptDir%\google-chrome.ahk"
 #Include "%A_ScriptDir%\jetbrains.ahk"
 #Include "%A_ScriptDir%\obsidian.ahk"
