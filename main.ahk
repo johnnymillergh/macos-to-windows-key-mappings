@@ -52,6 +52,17 @@ Lwin & Right::Send("!{Right}")
 ;F18::Run https://www.reddit.com
 ;F19::Run https://facebook.com
 
+; Control the Mouse with the Keyboard with WASD
+; https://www.autohotkey.com/boards/viewtopic.php?t=24588
+; https://www.autohotkey.com/boards/viewtopic.php?t=67139
+MOUSE_OFFSET := 15
+!w::MouseMove 0, (MOUSE_OFFSET * -1), 0, "R"
+!s::MouseMove 0, MOUSE_OFFSET, 0, "R"
+!a::MouseMove (MOUSE_OFFSET * -1), 0, 0, "R"
+!d::MouseMove MOUSE_OFFSET, 0, 0, "R"
+!r::Click "Left"
+!t::Click "Right"
+
 ; --------------------------------------------------------------
 ; Include .ahk file
 ; --------------------------------------------------------------
