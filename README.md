@@ -23,7 +23,7 @@ This repository is based on the former gist [`johnnymillergh/macOS Keyboard to W
    $ git clone https://github.com/johnnymillergh/macos-to-windows-key-mappings.git -b main
    ```
 
-3. Double click on `main.ahk` file to run.
+3. Double click on `macOS Keymap.ahk` file to run.
 
 ## Auto Start after Windows Startup
 
