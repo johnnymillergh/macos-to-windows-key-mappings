@@ -1,4 +1,5 @@
 ﻿; Relauch as admin if not already running as admin
+; https://www.autohotkey.com/docs/v2/lib/Run.htm#RunAs
 full_command_line := DllCall("GetCommandLine", "str")
 
 if not (A_IsAdmin or RegExMatch(full_command_line, " /restart(?!\S)"))
