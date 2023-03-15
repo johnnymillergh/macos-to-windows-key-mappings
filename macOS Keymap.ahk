@@ -1,4 +1,6 @@
-﻿; Relauch as admin if not already running as admin
+﻿#Requires AutoHotkey >=2.0.2
+
+; Relauch as admin if not already running as admin
 ; https://www.autohotkey.com/docs/v2/lib/Run.htm#RunAs
 full_command_line := DllCall("GetCommandLine", "str")
 
@@ -89,12 +91,12 @@ MOUSE_OFFSET := 15
 ; --------------------------------------------------------------
 ; Include .ahk file
 ; --------------------------------------------------------------
-#Include "%A_ScriptDir%\macos-common.ahk"
-#Include "%A_ScriptDir%\windows.ahk"
-#Include "%A_ScriptDir%\google-chrome.ahk"
-#Include "%A_ScriptDir%\jetbrains.ahk"
-#Include "%A_ScriptDir%\obsidian.ahk"
-#Include "%A_ScriptDir%\typora.ahk"
-#Include "%A_ScriptDir%\im.ahk"
-#Include "%A_ScriptDir%\terminal.ahk"
-#Include "%A_ScriptDir%\postman.ahk"
+#Include "%A_ScriptDir%\module\macos-common.ahk"
+#Include "%A_ScriptDir%\module\windows.ahk"
+#Include "%A_ScriptDir%\module\google-chrome.ahk"
+#Include "%A_ScriptDir%\module\jetbrains.ahk"
+#Include "%A_ScriptDir%\module\obsidian.ahk"
+#Include "%A_ScriptDir%\module\typora.ahk"
+#Include "%A_ScriptDir%\module\im.ahk"
+#Include "%A_ScriptDir%\module\terminal.ahk"
+#Include "%A_ScriptDir%\module\postman.ahk"
