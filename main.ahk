@@ -1,4 +1,21 @@
-﻿;-----------------------------------------
+﻿; Relauch as admin if not already running as admin
+full_command_line := DllCall("GetCommandLine", "str")
+
+if not (A_IsAdmin or RegExMatch(full_command_line, " /restart(?!\S)"))
+{
+    try
+    {
+        if A_IsCompiled
+            Run '*RunAs "' A_ScriptFullPath '" /restart'
+        else
+            Run '*RunAs "' A_AhkPath '" /restart "' A_ScriptFullPath '"'
+    }
+    ExitApp
+}
+
+MsgBox "A_IsAdmin: " A_IsAdmin "`nCommand line: " full_command_line
+
+;-----------------------------------------
 ; macOS Keyboard to Windows Key Mappings
 ;=========================================
 
@@ -60,6 +77,11 @@ MOUSE_OFFSET := 15
 !s::MouseMove 0, MOUSE_OFFSET, 0, "R"
 !a::MouseMove (MOUSE_OFFSET * -1), 0, 0, "R"
 !d::MouseMove MOUSE_OFFSET, 0, 0, "R"
+!+w::MouseMove 0, (MOUSE_OFFSET * 4 * -1), 50, "R"
+!+s::MouseMove 0, MOUSE_OFFSET * 4, 50, "R"
+!+a::MouseMove (MOUSE_OFFSET * 4 * -1), 0, 50, "R"
+!+d::MouseMove MOUSE_OFFSET * 4, 0, 50, "R"
+
 !r::Click "Left"
 !t::Click "Right"
 
