@@ -41,6 +41,8 @@
 #!2::Send("^!2")
 ; Create a heading 3 with ⌘ + option + 3
 #!3::Send("^!3")
+; With text selected, inline code with ⌘ + e
+#e::Send("^e")
 
 ; While Blocks are Selected
 ; Expand the selection up or down with ⌘ + shift + left/right. FIXME: Does seem to be working
