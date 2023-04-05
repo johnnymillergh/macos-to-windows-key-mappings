@@ -95,6 +95,7 @@ MOUSE_OFFSET := 15
 #Include "%A_ScriptDir%\module\windows.ahk"
 #Include "%A_ScriptDir%\module\google-chrome.ahk"
 #Include "%A_ScriptDir%\module\jetbrains.ahk"
+#Include "%A_ScriptDir%\module\notion.ahk"
 #Include "%A_ScriptDir%\module\obsidian.ahk"
 #Include "%A_ScriptDir%\module\typora.ahk"
 #Include "%A_ScriptDir%\module\im.ahk"

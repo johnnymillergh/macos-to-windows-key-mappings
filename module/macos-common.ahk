@@ -47,7 +47,7 @@
 ; Close window with ⌘ + q
 #q::Send("!{F4}")
 
-; Remap Windows + Tab to Alt + Tab.
+; Remap Windows + Tab to Alt + Tab. Switch window with ⌘ + tab
 Lwin & Tab::AltTab
 
 ; Minimize window with ⌘ + m
