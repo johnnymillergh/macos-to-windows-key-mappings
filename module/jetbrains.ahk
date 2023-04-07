@@ -43,15 +43,6 @@ or WinActive("ahk_exe Code.exe")
 ; Optimize imports with alt + shift + o, seems like all platforms have the same shortcut, which is control + alt + o
 ;!+o::Send ^!o
 
-; Git commit with ⌘ + k
-#k::Send("^k")
-
-; Git push with ⌘ + shift + k
-#+k::Send("^+k")
-
-; Git pull with ⌘ + t
-#t::Send("^t")
-
 ; Close editor's tab with ⌘ + w
 #w::Send("^{F4}")
 
@@ -112,6 +103,15 @@ or WinActive("ahk_exe Code.exe")
 ; Call hierarchy with ⌘ + alt + h
 #!h::Send("^!h")
 
+; Git
+; Git commit with ⌘ + k
+#k::Send("^k")
+; Git push with ⌘ + shift + k
+#+k::Send("^+k")
+; Git pull with ⌘ + t
+#t::Send("^t")
 ; Git rollback with ⌘ + alt + z
 #!z::Send("^!z")
+; Git new branch with ⌘ + option + n
+#!n::Send("^!n")
 #HotIf
