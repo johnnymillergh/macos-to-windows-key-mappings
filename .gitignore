@@ -3,6 +3,7 @@
 
 ### Project ###
 *.exe
+*.lnk
 
 ### VisualStudioCode ###
 .vscode/*
