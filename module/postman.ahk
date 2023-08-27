@@ -13,4 +13,6 @@
 #/::Send("^/")
 ; Search with ⌘ + k
 #k::Send("^k")
+; Beautify JavaScript with ⌘ + b, https://community.postman.com/t/any-way-to-align-format-lint-code-in-tests-block-in-postman/12277
+#b::Send("^b")
 #HotIf
