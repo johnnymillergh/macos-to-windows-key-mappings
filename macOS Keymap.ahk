@@ -1,4 +1,4 @@
-﻿#Requires AutoHotkey >=2.0.2
+﻿#Requires AutoHotkey >=2.0.10
 
 ; Relauch as admin if not already running as admin
 ; https://www.autohotkey.com/docs/v2/lib/Run.htm#RunAs
