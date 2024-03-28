@@ -17,7 +17,7 @@ full_command_line := DllCall("GetCommandLine", "str")
 ; }
 
 ;MsgBox "A_IsAdmin: " A_IsAdmin "`nCommand line: " full_command_line
-TrayTip "macOS keymap is running.`nA_IsAdmin: " A_IsAdmin "`nCommand line: " full_command_line, "macOS Keymap"
+TrayTip "macOS keymap is running with AutoHotKey " A_AhkVersion "`nA_IsAdmin: " A_IsAdmin "`nCommand line: " full_command_line, "macOS Keymap"
 
 ;-----------------------------------------
 ; macOS Keyboard to Windows Key Mappings
