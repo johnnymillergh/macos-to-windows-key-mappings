@@ -18,7 +18,7 @@ jobs:
     name: AutoHotkey Building
     runs-on: windows-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v2
       - name: Install winget
         uses: Cyberboss/install-winget@v1
@@ -26,6 +26,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Install AutoHotkey
         shell: powershell
-        run: winget install autohotkey --disable-interactivity --accept-source-agreements
+        run: winget install AutoHotkey.AutoHotkey --disable-interactivity --accept-source-agreements
       - name: Build AHK Script
         run: autohotkey.exe /ErrorStdOut "macOS Keymap.ahk" 2>&1 |more
