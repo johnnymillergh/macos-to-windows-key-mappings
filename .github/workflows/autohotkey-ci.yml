@@ -30,10 +30,14 @@ jobs:
           winget install AutoHotkey.AutoHotkey --disable-interactivity --accept-source-agreements --verbose --location "C:\Program Files\AutoHotkey"
           ls -R 'C:\Program Files\AutoHotkey'
       - name: Build AutoHotkey Script
+        shell: powershell
         run: |
           & "C:\Program Files\AutoHotkey\v2\AutoHotkey.exe" /ErrorStdOut "macOS Keymap.ahk" 2>"Syntax-Error.log"
+          ls -R
+          "Show Syntax-Error.log"
           cat '.\Syntax-Error.log'
       # - name: Compile AutoHotkey Script
+      #   shell: powershell
       #   run: |
       #     & "C:\Program Files\AutoHotkey\Compiler\Ahk2Exe.exe" /in "macOS Keymap.ahk" /out "macOS Keymap.exe"
       #     ls
