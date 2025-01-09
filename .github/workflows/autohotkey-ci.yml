@@ -1,0 +1,31 @@
+name: AutoHotkey CI
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches:
+      - 'main'
+      - 'develop'
+      - 'release/**'
+      - 'hotfix/**'
+    paths-ignore:
+      - '**.md'
+      - '_config.yml'
+
+jobs:
+  build:
+    name: AutoHotkey Building
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Install winget
+        uses: Cyberboss/install-winget@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install AutoHotkey
+        shell: powershell
+        run: winget install autohotkey --disable-interactivity --accept-source-agreements
+      - name: Build AHK Script
+        run: autohotkey.exe /ErrorStdOut "macOS Keymap.ahk" 2>&1 |more
