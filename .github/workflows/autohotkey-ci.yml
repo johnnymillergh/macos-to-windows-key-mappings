@@ -15,7 +15,7 @@ on:
 
 jobs:
   build:
-    name: AutoHotkey Building
+    name: Build AutoHotkey Script
     runs-on: windows-latest
     steps:
       - name: Checkout Repository
@@ -26,6 +26,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Install AutoHotkey
         shell: powershell
-        run: winget install AutoHotkey.AutoHotkey --disable-interactivity --accept-source-agreements --verbose
-      - name: Build AHK Script
-        run: autohotkey.exe /ErrorStdOut "macOS Keymap.ahk" 2>&1 |more
+        run: winget install AutoHotkey.AutoHotkey --disable-interactivity --accept-source-agreements --verbose --location "C:\Program Files\AutoHotkey"
+      - name: Build AutoHotkey Script
+        run: |
+          & "C:\Program Files\AutoHotkey\v2\AutoHotkey.exe" /ErrorStdOut "macOS Keymap.ahk" 2>"Syntax-Error.log"
+          cat '.\Syntax-Error.log'
+      - name: Compile AutoHotkey Script
+        run: |
+          & "C:\Program Files\AutoHotkey\Compiler\Ahk2Exe.exe" /in "macOS Keymap.ahk" /out "macOS Keymap.exe"
+          ls
