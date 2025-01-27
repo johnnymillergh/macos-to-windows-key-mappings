@@ -43,4 +43,13 @@
 
 ; Open an incognito window with ⌘ + Shift + n
 #+n::Send("^+n")
+
+; Open the Downloads page in a new tab with ⌘ + shift + j
+#+j::Send("^j")
+
+; Jump to the next match to your Find Bar search with ⌘ + g
+#g::Send("^g")
+
+; Jump to the previous match to your Find Bar search with ⌘ + shift + g
+#+g::Send("^+g")
 #HotIf
