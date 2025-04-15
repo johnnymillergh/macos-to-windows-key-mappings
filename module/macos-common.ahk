@@ -122,5 +122,5 @@ Lwin & Tab::AltTab
 ;^ä::SendInput {}}
 
 ; macOS-like natural scrolling
-WheelUp::Send("{WheelDown}")
-WheelDown::Send("{WheelUp}")
+; WheelUp::Send("{WheelDown}")
+; WheelDown::Send("{WheelUp}")
