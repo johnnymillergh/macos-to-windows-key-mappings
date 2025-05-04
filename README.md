@@ -1,14 +1,15 @@
 # macOS to Windows Key Mappings
 
-[AutoHotkey](https://www.autohotkey.com/) script `main.ahk` is the entrance of the program, which maps macOS keyboard shortcuts to Windows platform. Here is the main functions including:
+[AutoHotkey](https://www.autohotkey.com/) script `macOS Keymap.ahk` is the entrance of the program, which maps macOS keyboard shortcuts to Windows platform. Here is the main functions including:
 
-- Based on the latest AutoKotkey - [![](https://img.shields.io/badge/AutoHotKey-v2.0.2-informational?style=flat&logo=autohotkey&logoColor=white&color=2bbc8a)](https://github.com/AutoHotkey/AutoHotkey/releases/tag/v2.0.2).
+- Based on the AutoKotkey - [![](https://img.shields.io/badge/AutoHotKey-v2.0.10-informational?style=flat&logo=autohotkey&logoColor=white&color=2bbc8a)](https://github.com/AutoHotkey/AutoHotkey/releases/tag/v2.0.10).
 - Common text or file editing keyboard shortcuts.
 - JetBrains keyboard shortcuts (also works with Visual Studio Code's plugin `IntelliJ IDEA Keybindings`).
 - Typora keyboard shortcuts.
 - Google Chrome keyboard shortcuts.
 - The keyboard shortcuts for instant message apps like Microsoft Teams, WeChat, Slack, Lark.
 - Windows Terminal keyboard shortcuts.
+- DaVinci Resolve keyboard shortcuts.
 - And much more Windows apps to be supported.
 
 This repository is based on the former gist [`johnnymillergh/macOS Keyboard to Windows Key Mappings.ahk`](https://gist.github.com/johnnymillergh/7df327476e1953e233827d88c823bfc8).
