@@ -1,5 +1,5 @@
 ; --------------------------------------------------------------
-; Obsidian Specificications
+; Obsidian Specifications
 ; --------------------------------------------------------------
 #HotIf WinActive("ahk_exe Obsidian.exe")
 ; Open settings with ⌘ + ,

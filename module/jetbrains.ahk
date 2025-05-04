@@ -1,5 +1,5 @@
 ; --------------------------------------------------------------
-; JetBrains Specificications
+; JetBrains Specifications
 ; This mappings also work with Visual Studio Code with the plugin "IntelliJ IDEA Keybindings"
 ; --------------------------------------------------------------
 #HotIf WinActive("ahk_exe idea64.exe")

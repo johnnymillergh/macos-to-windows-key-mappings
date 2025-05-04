@@ -1,6 +1,6 @@
 ; --------------------------------------------------------------
 ; Windows Built-in Softwares (File Explorer)
-; Specificications
+; Specifications
 ; --------------------------------------------------------------
 #HotIf WinActive("ahk_exe explorer.exe")
 ; Crate a new folder with ⌘ + shift + enter

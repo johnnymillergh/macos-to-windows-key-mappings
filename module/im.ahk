@@ -1,6 +1,6 @@
 ; --------------------------------------------------------------
 ; IM app (QQ, WeChat, WeCom, Teams, Slack, Lark, DingTalk)
-; Specificications
+; Specifications
 ; --------------------------------------------------------------
 #HotIf WinActive("ahk_exe QQ.exe")
 or WinActive("ahk_class WeChatMainWndForPC")

@@ -76,15 +76,15 @@ Lwin & Right::Send("!{Right}")
 ; Control the Mouse with the Keyboard with WASD
 ; https://www.autohotkey.com/boards/viewtopic.php?t=24588
 ; https://www.autohotkey.com/boards/viewtopic.php?t=67139
-MOUSE_OFFSET := 15
-!w::MouseMove 0, (MOUSE_OFFSET * -1), 0, "R"
-!s::MouseMove 0, MOUSE_OFFSET, 0, "R"
-!a::MouseMove (MOUSE_OFFSET * -1), 0, 0, "R"
-!d::MouseMove MOUSE_OFFSET, 0, 0, "R"
-!+w::MouseMove 0, (MOUSE_OFFSET * 4 * -1), 50, "R"
-!+s::MouseMove 0, MOUSE_OFFSET * 4, 50, "R"
-!+a::MouseMove (MOUSE_OFFSET * 4 * -1), 0, 50, "R"
-!+d::MouseMove MOUSE_OFFSET * 4, 0, 50, "R"
+; MOUSE_OFFSET := 15
+; !w::MouseMove 0, (MOUSE_OFFSET * -1), 0, "R"
+; !s::MouseMove 0, MOUSE_OFFSET, 0, "R"
+; !a::MouseMove (MOUSE_OFFSET * -1), 0, 0, "R"
+; !d::MouseMove MOUSE_OFFSET, 0, 0, "R"
+; !+w::MouseMove 0, (MOUSE_OFFSET * 4 * -1), 50, "R"
+; !+s::MouseMove 0, MOUSE_OFFSET * 4, 50, "R"
+; !+a::MouseMove (MOUSE_OFFSET * 4 * -1), 0, 50, "R"
+; !+d::MouseMove MOUSE_OFFSET * 4, 0, 50, "R"
 
 !r::Click "Left"
 !t::Click "Right"
@@ -102,3 +102,4 @@ MOUSE_OFFSET := 15
 #Include "%A_ScriptDir%\module\im.ahk"
 #Include "%A_ScriptDir%\module\terminal.ahk"
 #Include "%A_ScriptDir%\module\postman.ahk"
+#Include "%A_ScriptDir%\module\davinci-resolve.ahk"

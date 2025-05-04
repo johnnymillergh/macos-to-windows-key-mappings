@@ -1,5 +1,5 @@
 ; --------------------------------------------------------------
-; Typora Specificications
+; Typora Specifications
 ; --------------------------------------------------------------
 #HotIf WinActive("ahk_exe Typora.exe")
 ; New with ⌘ + n

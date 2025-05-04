@@ -1,7 +1,7 @@
 ; --------------------------------------------------------------
-; Notion Specificications
-; Keyboard shorcuts https://www.notion.so/help/keyboard-shortcuts
-;                   https://usethekeyboard.com/notion/
+; Notion Specifications
+; Keyboard shortcuts https://www.notion.so/help/keyboard-shortcuts
+;                    https://usethekeyboard.com/notion/
 ; --------------------------------------------------------------
 #HotIf WinActive("ahk_exe Notion.exe")
 ; Main

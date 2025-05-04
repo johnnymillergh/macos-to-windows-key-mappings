@@ -1,5 +1,5 @@
 ; --------------------------------------------------------------
-; Windows Terminal Specificications
+; Windows Terminal Specifications
 ; --------------------------------------------------------------
 #HotIf WinActive("ahk_exe WindowsTerminal.exe")
 ; New tab with ⌘ + t

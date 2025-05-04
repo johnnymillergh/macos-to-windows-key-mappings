@@ -1,5 +1,5 @@
 ; --------------------------------------------------------------
-; Google Chrome Specificications
+; Google Chrome Specifications
 ; --------------------------------------------------------------
 #HotIf WinActive("ahk_exe chrome.exe")
 ; Show Web Developer Tools with ⌘ + alt + i

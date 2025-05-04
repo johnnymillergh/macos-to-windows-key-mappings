@@ -1,5 +1,5 @@
 ; --------------------------------------------------------------
-; Postman Specificications
+; Postman Specifications
 ; --------------------------------------------------------------
 #HotIf WinActive("ahk_exe Postman.exe")
 ; Request
