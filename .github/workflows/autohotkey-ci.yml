@@ -20,10 +20,9 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-      - name: Install winget
-        uses: Cyberboss/install-winget@v1
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Winget Version
+        shell: powershell
+        run: winget -v
       - name: Install AutoHotkey
         shell: powershell
         run: |
