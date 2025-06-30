@@ -3,7 +3,7 @@
 ; Specifications
 ; --------------------------------------------------------------
 #HotIf WinActive("ahk_exe QQ.exe")
-or WinActive("ahk_class WeChatMainWndForPC")
+or WinActive("ahk_exe Weixin.exe")
 or WinActive("ahk_exe WXWork.exe")
 or WinActive("ahk_exe Teams.exe")
 or WinActive("ahk_exe Slack.exe")
