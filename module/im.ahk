@@ -11,11 +11,12 @@ or WinActive("ahk_exe Teams.exe")
 or WinActive("ahk_exe Slack.exe")
 or WinActive("ahk_exe Lark.exe")
 or WinActive("ahk_exe DingTalk.exe")
-Logger.Info("IM app active: " WinGetTitle("A"), "IM")
 
 ; Send message with ⌘ + enter
-#Enter::Send("^{Enter}")
+#Enter:: Send("^{Enter}")
 
 ; Minimize window with ⌘ + w
-#w::WinMinimize("a")
+#w:: WinMinimize("a")
 #HotIf
+
+Logger.Info("IM script loaded: " A_ScriptName, "IM")

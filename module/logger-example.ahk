@@ -3,7 +3,7 @@
 ; --------------------------------------------------------------
 
 #Requires AutoHotkey >=2.0.10
-#Include "%A_ScriptDir%\logger.ahk"
+#Include "logger.ahk"
 
 ; Example 1: Basic logging
 Logger.Info("Application started")

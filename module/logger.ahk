@@ -79,10 +79,10 @@ class Logger {
         levelName := ""
         switch level {
             case Logger.DEBUG: levelName := "DEBUG"
-            case Logger.INFO:  levelName := "INFO "
-            case Logger.WARN:  levelName := "WARN "
+            case Logger.INFO: levelName := "INFO "
+            case Logger.WARN: levelName := "WARN "
             case Logger.ERROR: levelName := "ERROR"
-            default:           levelName := "INFO "
+            default: levelName := "INFO "
         }
 
         ; Format module name

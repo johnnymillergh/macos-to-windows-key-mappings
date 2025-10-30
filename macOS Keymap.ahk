@@ -17,7 +17,8 @@ full_command_line := DllCall("GetCommandLine", "str")
 ; }
 
 ;MsgBox "A_IsAdmin: " A_IsAdmin "`nCommand line: " full_command_line
-TrayTip("macOS keymap is running with AutoHotKey " A_AhkVersion "`nA_IsAdmin: " A_IsAdmin "`nCommand line: " full_command_line, "macOS Keymap")
+TrayTip("macOS keymap is running with AutoHotKey " A_AhkVersion "`nA_IsAdmin: " A_IsAdmin "`nCommand line: " full_command_line,
+    "macOS Keymap")
 
 ;-----------------------------------------
 ; macOS Keyboard to Windows Key Mappings
@@ -56,8 +57,8 @@ SendMode("Input")
 
 ; Remap Windows + Left OR Right to enable previous or next web page
 ; Use only if swapping left ⌘/WIN key with left alt
-Lwin & Left::Send("!{Left}")
-Lwin & Right::Send("!{Right}")
+Lwin & Left:: Send("!{Left}")
+Lwin & Right:: Send("!{Right}")
 
 ; Eject Key
 ;F20::SendInput("{Insert}") ; F20 doesn't show up on AHK anymore, see #3
@@ -86,8 +87,8 @@ Lwin & Right::Send("!{Right}")
 ; !+a::MouseMove (MOUSE_OFFSET * 4 * -1), 0, 50, "R"
 ; !+d::MouseMove MOUSE_OFFSET * 4, 0, 50, "R"
 
-!r::Click "Left"
-!t::Click "Right"
+!r:: Click "Left"
+!t:: Click "Right"
 
 ; --------------------------------------------------------------
 ; Include .ahk file
@@ -98,7 +99,6 @@ Lwin & Right::Send("!{Right}")
 #Include "%A_ScriptDir%\module\google-chrome.ahk"
 #Include "%A_ScriptDir%\module\jetbrains.ahk"
 #Include "%A_ScriptDir%\module\notion.ahk"
-#Include "%A_ScriptDir%\module\obsidian.ahk"
 #Include "%A_ScriptDir%\module\typora.ahk"
 #Include "%A_ScriptDir%\module\im.ahk"
 #Include "%A_ScriptDir%\module\terminal.ahk"
@@ -106,5 +106,4 @@ Lwin & Right::Send("!{Right}")
 #Include "%A_ScriptDir%\module\davinci-resolve.ahk"
 
 ; Set thread name for better logging readability
-Logger.SetCurrentThreadName("MainThread")
-Logger.Info("macOS Keymap script started", "Main")
+Logger.Info("macOS Keymap script started: " A_ScriptName, "Main")
