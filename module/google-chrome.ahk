@@ -37,13 +37,14 @@ CheckChromeFullScreen() {
         Send("^!s")  ; Send Ctrl + Alt + S to activate Lossless Scaling
         chromeWasFullScreen := true
     } else if (!isFullScreen && chromeWasFullScreen) {
-        Logger.Info("Exited full screen", "Chrome")
+        Logger.Info("Exited full screen, deactivate Lossless Scaling (Ctrl+Alt+S)", "Chrome")
+        Send("^!s")  ; Send Ctrl + Alt + S to de-activate Lossless Scaling
         chromeWasFullScreen := false
     }
 }
 
 ; Run check every 2000ms - only processes when Chrome is active
-SetTimer(CheckChromeFullScreen, 2000)
+SetTimer(CheckChromeFullScreen, 500)
 
 #HotIf WinActive("ahk_exe chrome.exe")
 
