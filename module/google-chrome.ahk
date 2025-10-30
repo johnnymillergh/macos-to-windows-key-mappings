@@ -1,6 +1,44 @@
 ; --------------------------------------------------------------
 ; Google Chrome Specifications
 ; --------------------------------------------------------------
+
+; Full screen detection state
+global chromeWasFullScreen := false
+
+; Simple, reliable full screen detection - only runs when Chrome is active
+CheckChromeFullScreen() {
+    global chromeWasFullScreen
+
+    ; Only check if Chrome is the active window
+    if !WinActive("ahk_exe chrome.exe")
+        return
+    ; Get Chrome window position and size
+    WinGetPos(&winX, &winY, &winWidth, &winHeight, "A")
+
+    ; Get screen dimensions
+    MonitorGet(MonitorGetPrimary(), &monLeft, &monTop, &monRight, &monBottom)
+    screenWidth := monRight - monLeft
+    screenHeight := monBottom - monTop
+
+    ; Check if window covers entire screen (full screen mode)
+    isFullScreen := (winX <= 0 && winY <= 0 && winWidth >= screenWidth && winHeight >= screenHeight)
+    ; Log window state (DEBUG level - only shows if Logger.SetLevel(Logger.DEBUG) is called)
+    Logger.Debug("Window: " winWidth "x" winHeight " at (" winX "," winY ") | Screen: " screenWidth "x" screenHeight " | FullScreen: " isFullScreen " | Was: " chromeWasFullScreen, "Chrome")
+
+    ; Trigger only on transition to full screen (not continuously)
+    if (isFullScreen && !chromeWasFullScreen) {
+        Logger.Info("Full screen detected - triggering Lossless Scaling (Ctrl+Alt+S)", "Chrome")
+        Send("^!s")  ; Send Ctrl + Alt + S to activate Lossless Scaling
+        chromeWasFullScreen := true
+    } else if (!isFullScreen && chromeWasFullScreen) {
+        Logger.Info("Exited full screen", "Chrome")
+        chromeWasFullScreen := false
+    }
+}
+
+; Run check every 2000ms - only processes when Chrome is active
+SetTimer(CheckChromeFullScreen, 2000)
+
 #HotIf WinActive("ahk_exe chrome.exe")
 ; Show Web Developer Tools with ⌘ + alt + i
 #!i::Send("{F12}")
