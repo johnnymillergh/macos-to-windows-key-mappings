@@ -1,3 +1,5 @@
+#Include "%A_ScriptDir%\module\logger.ahk"
+
 ; --------------------------------------------------------------
 ; JetBrains Specifications
 ; This mappings also work with Visual Studio Code with the plugin "IntelliJ IDEA Keybindings"
@@ -7,7 +9,9 @@
 or WinActive("ahk_exe datagrip64.exe")
 or WinActive("ahk_exe webstorm64.exe")
 or WinActive("ahk_exe Code.exe")
-; Auto-complementation current line and return new line
+Logger.Info("JetBrains IDE activated: " WinGetTitle("A"), "JetBrains")
+
+; Auto-completion current line and return new line
 #+Enter::^+Enter
 
 ; Globally find with ⌘ + shift + f

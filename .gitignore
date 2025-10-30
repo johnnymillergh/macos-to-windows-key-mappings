@@ -4,6 +4,7 @@
 ### Project ###
 *.exe
 *.lnk
+*.log
 
 ### VisualStudioCode ###
 .vscode/*

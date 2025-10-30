@@ -21,6 +21,10 @@ class Logger {
     ; Maximum log file size in bytes (10MB default)
     static maxSize := 10485760
 
+    ; Include PID and thread ID in logs
+    static includePID := true
+    static includeThreadID := true
+
     /**
      * Log a debug message
      * @param message The message to log
@@ -87,8 +91,27 @@ class Logger {
         ; Format timestamp
         timestamp := FormatTime(A_Now, "yyyy-MM-dd HH:mm:ss")
 
+        ; Get PID if enabled
+        pidStr := ""
+        if (Logger.includePID) {
+            pid := DllCall("GetCurrentProcessId")
+            pidStr := "[PID:" pid "] "
+        }
+
+        ; Get Thread Name/ID if enabled
+        threadStr := ""
+        if (Logger.includeThreadID) {
+            tid := DllCall("GetCurrentThreadId")
+            threadName := Logger.GetThreadName(tid)
+            if (threadName != "") {
+                threadStr := "[Thread:" threadName "] "
+            } else {
+                threadStr := "[TID:" tid "] "
+            }
+        }
+
         ; Build log line
-        logLine := timestamp " [" levelName "] " moduleStr message "`n"
+        logLine := timestamp " " pidStr threadStr "[" levelName "] " moduleStr message "`n"
 
         ; Write to file
         try {
@@ -155,6 +178,86 @@ class Logger {
                 FileDelete(Logger.logFile)
         } catch {
             ; Ignore errors
+        }
+    }
+
+    /**
+     * Enable PID logging
+     */
+    static EnablePID() {
+        Logger.includePID := true
+    }
+
+    /**
+     * Disable PID logging
+     */
+    static DisablePID() {
+        Logger.includePID := false
+    }
+
+    /**
+     * Enable Thread ID logging
+     */
+    static EnableThreadID() {
+        Logger.includeThreadID := true
+    }
+
+    /**
+     * Disable Thread ID logging
+     */
+    static DisableThreadID() {
+        Logger.includeThreadID := false
+    }
+
+    /**
+     * Get thread name using Windows API
+     * @param tid Thread ID
+     * @return Thread name if available, empty string otherwise
+     */
+    static GetThreadName(tid) {
+        try {
+            ; Open thread handle with QUERY_LIMITED_INFORMATION access (0x0800)
+            hThread := DllCall("OpenThread", "UInt", 0x0800, "Int", 0, "UInt", tid, "Ptr")
+            if (!hThread)
+                return ""
+
+            ; Try to get thread description (Windows 10 1607+)
+            pDescription := 0
+            result := DllCall("GetThreadDescription", "Ptr", hThread, "Ptr*", &pDescription, "UInt")
+
+            threadName := ""
+            if (result = 0 && pDescription) {  ; S_OK = 0
+                ; Read the wide string from the pointer
+                threadName := StrGet(pDescription, "UTF-16")
+                ; Free the memory allocated by GetThreadDescription
+                DllCall("LocalFree", "Ptr", pDescription)
+            }
+
+            ; Close thread handle
+            DllCall("CloseHandle", "Ptr", hThread)
+
+            return threadName
+        } catch {
+            return ""
+        }
+    }
+
+    /**
+     * Set current thread name (for better logging)
+     * @param name Thread name to set
+     */
+    static SetCurrentThreadName(name) {
+        try {
+            tid := DllCall("GetCurrentThreadId")
+            hThread := DllCall("OpenThread", "UInt", 0x0800, "Int", 0, "UInt", tid, "Ptr")
+            if (!hThread)
+                return
+
+            ; Set thread description (Windows 10 1607+)
+            DllCall("SetThreadDescription", "Ptr", hThread, "Str", name)
+            DllCall("CloseHandle", "Ptr", hThread)
+        } catch {
+            ;
         }
     }
 }

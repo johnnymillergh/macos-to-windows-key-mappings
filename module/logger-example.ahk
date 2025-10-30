@@ -28,16 +28,29 @@ Logger.Info("This won't be logged")
 Logger.Enable()
 Logger.Info("This will be logged")
 
-; Example 6: Clear log file
+; Example 6: Enable PID and Thread ID/Name logging
+Logger.EnablePID()
+Logger.EnableThreadID()
+
+; Set a custom name for the current thread (optional, for better readability)
+Logger.SetCurrentThreadName("MainThread")
+Logger.Info("This log includes PID and Thread Name")
+
+; Example 7: Disable PID/Thread ID logging
+Logger.DisablePID()
+Logger.DisableThreadID()
+Logger.Info("Back to normal logging")
+
+; Example 8: Clear log file
 ; Logger.Clear()  ; Uncomment to delete the log file
 
-; Example 7: Log levels in order of severity
+; Example 9: Log levels in order of severity
 ; DEBUG (0) - Detailed debugging information
 ; INFO  (1) - General informational messages (default level)
 ; WARN  (2) - Warning messages
 ; ERROR (3) - Error messages
 
-; Example 8: Logging in a function
+; Example 10: Logging in a function
 MyFunction() {
     Logger.Info("MyFunction called", "App")
 

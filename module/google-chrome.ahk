@@ -40,6 +40,8 @@ CheckChromeFullScreen() {
 SetTimer(CheckChromeFullScreen, 2000)
 
 #HotIf WinActive("ahk_exe chrome.exe")
+Logger.Info("Google Chrome activated: " WinGetTitle("A"), "Chrome")
+
 ; Show Web Developer Tools with ⌘ + alt + i
 #!i::Send("{F12}")
 
