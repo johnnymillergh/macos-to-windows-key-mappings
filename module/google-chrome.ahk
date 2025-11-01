@@ -15,6 +15,7 @@ global supportedWebsites := [
     "Prime Video",
     "Twitch",
     "Vimeo",
+    "_哔哩哔哩_bilibili"
 ]
 
 ; Simple, reliable full screen detection - only runs when Chrome is active
