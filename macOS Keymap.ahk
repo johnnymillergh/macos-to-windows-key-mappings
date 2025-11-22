@@ -104,6 +104,7 @@ Lwin & Right:: Send("!{Right}")
 #Include "%A_ScriptDir%\module\terminal.ahk"
 #Include "%A_ScriptDir%\module\postman.ahk"
 #Include "%A_ScriptDir%\module\davinci-resolve.ahk"
+#Include "%A_ScriptDir%\module\lossless-scaling.ahk"
 
 ; Set thread name for better logging readability
 Logger.Info("macOS Keymap script started: " A_ScriptName, "Main")
