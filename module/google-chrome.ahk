@@ -1,4 +1,4 @@
-#Include "%A_ScriptDir%\module\logger.ahk"
+#Include "%A_ScriptDir%\module\lib\logger.ahk"
 #Include "%A_ScriptDir%\module\lib\media.ahk"
 
 ; --------------------------------------------------------------

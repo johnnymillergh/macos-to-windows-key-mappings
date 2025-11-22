@@ -93,7 +93,7 @@ Lwin & Right:: Send("!{Right}")
 ; --------------------------------------------------------------
 ; Include .ahk file
 ; --------------------------------------------------------------
-#Include "%A_ScriptDir%\module\logger.ahk"
+#Include "%A_ScriptDir%\module\lib\logger.ahk"
 #Include "%A_ScriptDir%\module\macos-common.ahk"
 #Include "%A_ScriptDir%\module\windows.ahk"
 #Include "%A_ScriptDir%\module\google-chrome.ahk"
