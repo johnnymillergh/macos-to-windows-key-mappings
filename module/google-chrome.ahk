@@ -1,4 +1,5 @@
 #Include "%A_ScriptDir%\module\logger.ahk"
+#Include "%A_ScriptDir%\module\lib\media.ahk"
 
 ; --------------------------------------------------------------
 ; Google Chrome Specifications
@@ -12,6 +13,7 @@ global supportedWebsites := [
     "Netflix",
     "Disney+",
     "Hulu",
+    "• HBO Max",
     "Prime Video",
     "Twitch",
     "Vimeo",
