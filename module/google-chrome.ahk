@@ -1,5 +1,4 @@
 #Include "%A_ScriptDir%\module\lib\logger.ahk"
-#Include "%A_ScriptDir%\module\lib\media.ahk"
 
 ; --------------------------------------------------------------
 ; Google Chrome Specifications
@@ -8,63 +7,62 @@
 ; Full screen detection state
 global chromeWasFullScreen := false
 
-global supportedWebsites := [
-    "- YouTube -",
-    "Netflix",
-    "Disney+",
-    "Hulu",
-    "• HBO Max",
-    "Prime Video",
-    "Twitch",
-    "Vimeo",
-    "_哔哩哔哩_bilibili"
-]
+/**
+* Check if Chrome is in full screen mode by examining window styles
+* @return {Boolean} 1 (true) if Chrome is in full screen mode, 0 (false) otherwise
+*/
+IsChromeFullscreen() {
+    if !WinExist("ahk_exe chrome.exe")
+        return false
 
-; Simple, reliable full screen detection - only runs when Chrome is active
+    ; Check 1: Window style (no titlebar)
+    style := WinGetStyle("ahk_exe chrome.exe")
+    hasNoCaption := !(style & 0xC00000)
+
+    /*
+    Check 2: Check Position Covers Screen
+
+    What it does:
+
+    - Gets Chrome's position and size:
+        - x, y = top-left corner coordinates
+        - w, h = width and height
+    - Gets the monitor's work area:
+        - MonitorGetPrimary() = gets the main monitor
+        - MonitorGetWorkArea() = gets usable screen space (excluding taskbar)
+        - left, top, right, bottom = screen boundaries
+    - Checks if window covers entire screen:
+        - x <= 0 - window starts at or before left edge
+        - y <= 0 - window starts at or before top edge
+        - w >= right - width extends to or beyond right edge
+        - h >= bottom - height extends to or beyond bottom edge
+    */
+    WinGetPos(&x, &y, &w, &h, "ahk_exe chrome.exe")
+    MonitorGetWorkArea(MonitorGetPrimary(), &left, &top, &right, &bottom)
+    coversScreen := (x <= 0 && y <= 0 && w >= right && h >= bottom)
+
+    ; True fullscreen = both conditions met
+    return hasNoCaption && coversScreen
+}
+
 CheckChromeFullScreen() {
     ; Prevent race conditions - make this function thread-safe
     Critical
-
-    ; Only check if Chrome is the active window
     if !WinActive("ahk_exe chrome.exe")
         return
-
-    ; Get Chrome title for website filtering
     chromeTitle := WinGetTitle("A")
-    siteSupported := false
-    for (index, site in supportedWebsites) {
-        if InStr(chromeTitle, site) {
-            siteSupported := true
-            break
-        }
-    }
-    if (!siteSupported) {
-        return
-    }
-
-    ; Get Chrome window position and size
-    WinGetPos(&winX, &winY, &winWidth, &winHeight, "A")
-
-    ; Get screen dimensions
-    MonitorGet(MonitorGetPrimary(), &monLeft, &monTop, &monRight, &monBottom)
-    screenWidth := monRight - monLeft
-    screenHeight := monBottom - monTop
-
     global chromeWasFullScreen
-    ; Check if window covers entire screen (full screen mode)
-    isFullScreen := (winX <= 0 && winY <= 0 && winWidth >= screenWidth && winHeight >= screenHeight)
-    ; Log window state (DEBUG level - only shows if Logger.SetLevel(Logger.DEBUG) is called)
-    Logger.Debug("Window: " winWidth "x" winHeight " at (" winX "," winY ") | Screen: " screenWidth "x" screenHeight " | FullScreen: " isFullScreen " | Was: " chromeWasFullScreen,
-        "Chrome")
-
-    ; Trigger only on transition to full screen (not continuously)
+    isFullScreen := IsChromeFullscreen()
+    Logger.Debug("FullScreen: " isFullScreen " | Was: " chromeWasFullScreen, "Chrome")
     if (isFullScreen && !chromeWasFullScreen) {
-        Logger.Info("Full screen detected - triggering Lossless Scaling (Ctrl+Alt+S), Chrome title: " chromeTitle, "Chrome")
-        Send("^!s")  ; Send Ctrl + Alt + S to activate Lossless Scaling
+        Logger.Info("Full screen detected - triggering Lossless Scaling, Chrome title: " chromeTitle, "Chrome")
+        ; Send Ctrl + Alt + S to activate Lossless Scaling
+        Send("^!s")
         chromeWasFullScreen := true
     } else if (!isFullScreen && chromeWasFullScreen) {
-        Logger.Info("Exited full screen, deactivate Lossless Scaling (Ctrl+Alt+S), Chrome title: " chromeTitle, "Chrome")
-        Send("^!s")  ; Send Ctrl + Alt + S to de-activate Lossless Scaling
+        Logger.Info("Exited full screen, deactivate Lossless Scaling, Chrome title: " chromeTitle, "Chrome")
+        ; Send Ctrl + Alt + S to de-activate Lossless Scaling
+        Send("^!s")
         chromeWasFullScreen := false
     }
 }
