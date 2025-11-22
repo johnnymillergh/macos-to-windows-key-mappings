@@ -1,4 +1,5 @@
 #Include "%A_ScriptDir%\module\lib\logger.ahk"
+#Include "%A_ScriptDir%\module\lib\profiler.ahk"
 
 ; --------------------------------------------------------------
 ; Google Chrome Specifications
@@ -8,12 +9,16 @@
 global chromeWasFullScreen := false
 
 /**
-* Check if Chrome is in full screen mode by examining window styles
-* @return {Boolean} 1 (true) if Chrome is in full screen mode, 0 (false) otherwise
-*/
+ * Check if Chrome is in full screen mode by examining window styles
+ * @return {Boolean} 1 (true) if Chrome is in full screen mode, 0 (false) otherwise
+ */
 IsChromeFullscreen() {
-    if !WinExist("ahk_exe chrome.exe")
+    timer := ProfileStart()
+    if !WinExist("ahk_exe chrome.exe") {
+        elapsed := ProfileEnd(timer)
+        Logger.Debug("IsChromeFullscreen (early return): " Format("{:.3f}", elapsed.ElapsedMsHighRes) " ms", "Chrome")
         return false
+    }
 
     ; Check 1: Window style (no titlebar)
     style := WinGetStyle("ahk_exe chrome.exe")
@@ -42,18 +47,30 @@ IsChromeFullscreen() {
     coversScreen := (x <= 0 && y <= 0 && w >= right && h >= bottom)
 
     ; True fullscreen = both conditions met
-    return hasNoCaption && coversScreen
+    result := hasNoCaption && coversScreen
+
+    elapsed := ProfileEnd(timer)
+    Logger.Debug("IsChromeFullscreen: " Format("{:.3f}", elapsed.ElapsedMsHighRes) " ms (result: " result ")", "Chrome")
+    return result
 }
 
-CheckChromeFullScreen() {
+ChromeFullScreenMonitor() {
+    timer := ProfileStart()
+
     ; Prevent race conditions - make this function thread-safe
     Critical
-    if !WinActive("ahk_exe chrome.exe")
+    if !WinActive("ahk_exe chrome.exe") {
+        elapsed := ProfileEnd(timer)
+        Logger.Debug("CheckChromeFullScreen (Chrome not active): " Format("{:.3f}", elapsed.ElapsedMsHighRes) " ms", "Chrome")
         return
+    }
+
     chromeTitle := WinGetTitle("A")
     global chromeWasFullScreen
     isFullScreen := IsChromeFullscreen()
+
     Logger.Debug("FullScreen: " isFullScreen " | Was: " chromeWasFullScreen, "Chrome")
+
     if (isFullScreen && !chromeWasFullScreen) {
         Logger.Info("Full screen detected - triggering Lossless Scaling, Chrome title: " chromeTitle, "Chrome")
         ; Send Ctrl + Alt + S to activate Lossless Scaling
@@ -65,10 +82,13 @@ CheckChromeFullScreen() {
         Send("^!s")
         chromeWasFullScreen := false
     }
+
+    elapsed := ProfileEnd(timer)
+    Logger.Debug("CheckChromeFullScreen total: " Format("{:.3f}", elapsed.ElapsedMsHighRes) " ms", "Chrome")
 }
 
-; Run check every 2000ms - only processes when Chrome is active
-SetTimer(CheckChromeFullScreen, 500)
+; Run check every 2000ms
+SetTimer(ChromeFullScreenMonitor, 2000)
 
 #HotIf WinActive("ahk_exe chrome.exe")
 
