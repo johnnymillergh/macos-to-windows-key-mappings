@@ -4,7 +4,7 @@
 ; Full screen detection state
 global wasFullScreen := false
 global monitoredApps := ["chrome.exe", "msedge.exe"]
-global titleBlockList := ["Netflix", "Disney+", "Tubi"]
+global titleBlockList := ["Netflix", "Disney+", "Paramount+", "Tubi"]
 
 /**
  * Check if current window is in full screen mode by examining window styles
