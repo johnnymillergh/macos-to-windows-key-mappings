@@ -4,6 +4,7 @@
 ; Full screen detection state
 global wasFullScreen := false
 global monitoredApps := ["chrome.exe", "msedge.exe"]
+global titleBlockList := ["Netflix", "Disney+", "Tubi"]
 
 /**
  * Check if current window is in full screen mode by examining window styles
@@ -14,7 +15,8 @@ IsWindowFullscreen() {
     activeWinID := WinGetID("A")
     if !activeWinID {
         elapsed := ProfileEnd(timer)
-        Logger.Debug("IsWindowFullscreen (early return): " Format("{:.3f}", elapsed.ElapsedMsHighRes) " ms", "Lossless Scaling")
+        Logger.Debug("IsWindowFullscreen (early return): " Format("{:.3f}", elapsed.ElapsedMsHighRes) " ms",
+        "Lossless Scaling")
         return false
     }
 
@@ -48,7 +50,8 @@ IsWindowFullscreen() {
     result := hasNoCaption && coversScreen
 
     elapsed := ProfileEnd(timer)
-    Logger.Debug("IsWindowFullscreen: " Format("{:.3f}", elapsed.ElapsedMsHighRes) " ms (result: " result ")", "Lossless Scaling")
+    Logger.Debug("IsWindowFullscreen: " Format("{:.3f}", elapsed.ElapsedMsHighRes) " ms (result: " result ")",
+    "Lossless Scaling")
     return result
 }
 
@@ -57,10 +60,11 @@ WindowFullScreenMonitor() {
 
     ; Prevent race conditions - make this function thread-safe
     Critical
-    
+
     global monitoredApps
     global wasFullScreen
-    
+    global titleBlockList
+
     ; Check if any monitored app is active
     activeApp := ""
     for exeName in monitoredApps {
@@ -69,32 +73,46 @@ WindowFullScreenMonitor() {
             break
         }
     }
-    
+
     if (activeApp == "") {
         elapsed := ProfileEnd(timer)
-        Logger.Debug("WindowFullScreenMonitor (no monitored app active): " Format("{:.3f}", elapsed.ElapsedMsHighRes) " ms", "Lossless Scaling")
+        Logger.Debug("WindowFullScreenMonitor (no monitored app active): " Format("{:.3f}", elapsed.ElapsedMsHighRes) " ms",
+        "Lossless Scaling")
         return
     }
 
     windowTitle := WinGetTitle("A")
+
+    ; Check if window title is in block list
+    for blockedTitle in titleBlockList {
+        if InStr(windowTitle, blockedTitle) {
+            elapsed := ProfileEnd(timer)
+            Logger.Debug("WindowFullScreenMonitor (blocked title): " windowTitle ". Skipping Lossless Scaling - " Format(
+                "{:.3f}", elapsed.ElapsedMsHighRes) " ms", "Lossless Scaling")
+            return
+        }
+    }
     isFullScreen := IsWindowFullscreen()
 
     Logger.Debug("FullScreen: " isFullScreen " | Was: " wasFullScreen, "Lossless Scaling")
 
     if (isFullScreen && !wasFullScreen) {
-        Logger.Info("Full screen detected - triggering Lossless Scaling, App: " activeApp " | Title: " windowTitle, "Lossless Scaling")
+        Logger.Info("Full screen detected - triggering Lossless Scaling, App: " activeApp " | Title: " windowTitle,
+            "Lossless Scaling")
         ; Send Ctrl + Alt + S to activate Lossless Scaling
         Send("^!s")
         wasFullScreen := true
     } else if (!isFullScreen && wasFullScreen) {
-        Logger.Info("Exited full screen, deactivate Lossless Scaling, App: " activeApp " | Title: " windowTitle, "Lossless Scaling")
+        Logger.Info("Exited full screen, deactivate Lossless Scaling, App: " activeApp " | Title: " windowTitle,
+            "Lossless Scaling")
         ; Send Ctrl + Alt + S to de-activate Lossless Scaling
         Send("^!s")
         wasFullScreen := false
     }
 
     elapsed := ProfileEnd(timer)
-    Logger.Debug("WindowFullScreenMonitor total: " Format("{:.3f}", elapsed.ElapsedMsHighRes) " ms", "Lossless Scaling")
+    Logger.Debug("WindowFullScreenMonitor total: " Format("{:.3f}", elapsed.ElapsedMsHighRes) " ms", "Lossless Scaling"
+    )
 }
 
 ; Run check every 2000ms
