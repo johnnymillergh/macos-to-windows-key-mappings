@@ -25,6 +25,7 @@ jobs:
         shell: powershell
         run: |
           winget install AutoHotkey.AutoHotkey --disable-interactivity --accept-source-agreements --location "C:\Program Files\AutoHotkey"
+          ls -R
 
       - name: Validate Syntax
         shell: powershell
