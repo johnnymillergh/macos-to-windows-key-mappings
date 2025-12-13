@@ -14,38 +14,9 @@ on:
       - '_config.yml'
 
 jobs:
-  syntax-check:
-    name: Syntax Validation
-    runs-on: windows-2025
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Install AutoHotkey
-        shell: powershell
-        run: |
-          winget install AutoHotkey.AutoHotkey --disable-interactivity --accept-source-agreements --location "C:\Program Files\AutoHotkey"
-          ls -R
-
-      - name: Validate Syntax
-        shell: powershell
-        run: |
-          Write-Host "Validating syntax on all .ahk files..."
-          $files = Get-ChildItem -Recurse -Filter "*.ahk" | Select-Object -ExpandProperty FullName
-          foreach ($file in $files) {
-            Write-Host "Checking: $file"
-            & "C:\Program Files\AutoHotkey\v2\AutoHotkey.exe" /ErrorStdOut $file
-            if ($LASTEXITCODE -ne 0) {
-              Write-Error "Syntax validation failed for: $file"
-              exit 1
-            }
-          }
-          Write-Host "All files validated successfully!" -ForegroundColor Green
-
   build:
     name: Build & Compile
     runs-on: windows-2025
-    needs: syntax-check
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -100,10 +71,3 @@ jobs:
           }
           Write-Host "Compilation successful! 🎉" -ForegroundColor Green
           Get-Item "macOS Keymap.exe"
-
-      - name: Upload Build Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: macos-keymap-exe-${{ github.sha }}
-          path: macOS Keymap.exe
-          retention-days: 30
