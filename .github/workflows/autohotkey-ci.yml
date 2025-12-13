@@ -33,7 +33,7 @@ jobs:
           $files = Get-ChildItem -Recurse -Filter "*.ahk" | Select-Object -ExpandProperty FullName
           foreach ($file in $files) {
             Write-Host "Checking: $file"
-            & "C:\Program Files\AutoHotkey\v2\AutoHotkey.exe" /ErrorStdOut /iLph $file
+            & "C:\Program Files\AutoHotkey\v2\AutoHotkey.exe" /ErrorStdOut $file
             if ($LASTEXITCODE -ne 0) {
               Write-Error "Syntax validation failed for: $file"
               exit 1
@@ -53,7 +53,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: C:\Program Files\AutoHotkey
-          key: ${{ runner.os }}-autohotkey-v2-compiler-${{ hashFiles('**/*.ahk') }}
+          key: ${{ runner.os }}-autohotkey-v2-compiler-${{ hashFiles('./macOS Keymap.ahk') }}
           restore-keys: |
             ${{ runner.os }}-autohotkey-v2-compiler-
             ${{ runner.os }}-autohotkey-v2-
