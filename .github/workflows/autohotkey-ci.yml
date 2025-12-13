@@ -14,29 +14,95 @@ on:
       - '_config.yml'
 
 jobs:
-  build:
-    name: Build AutoHotkey Script
-    runs-on: windows-2025
+  syntax-check:
+    name: Syntax Validation
+    runs-on: windows-2022
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
-      - name: Winget Version
-        shell: powershell
-        run: winget -v
+        uses: actions/checkout@v4
+
       - name: Install AutoHotkey
         shell: powershell
         run: |
-          winget install AutoHotkey.AutoHotkey --disable-interactivity --accept-source-agreements --verbose --location "C:\Program Files\AutoHotkey"
-          ls -R 'C:\Program Files\AutoHotkey'
-      - name: Build AutoHotkey Script
+          winget install AutoHotkey.AutoHotkey --disable-interactivity --accept-source-agreements --location "C:\Program Files\AutoHotkey"
+
+      - name: Validate Syntax
         shell: powershell
         run: |
-          & "C:\Program Files\AutoHotkey\v2\AutoHotkey.exe" /ErrorStdOut "macOS Keymap.ahk" 2>"Syntax-Error.log"
-          ls -R
-          "Show Syntax-Error.log"
-          cat '.\Syntax-Error.log'
-      # - name: Compile AutoHotkey Script
-      #   shell: powershell
-      #   run: |
-      #     & "C:\Program Files\AutoHotkey\Compiler\Ahk2Exe.exe" /in "macOS Keymap.ahk" /out "macOS Keymap.exe"
-      #     ls
+          Write-Host "Validating syntax on all .ahk files..."
+          $files = Get-ChildItem -Recurse -Filter "*.ahk" | Select-Object -ExpandProperty FullName
+          foreach ($file in $files) {
+            Write-Host "Checking: $file"
+            & "C:\Program Files\AutoHotkey\v2\AutoHotkey.exe" /ErrorStdOut /iLph $file
+            if ($LASTEXITCODE -ne 0) {
+              Write-Error "Syntax validation failed for: $file"
+              exit 1
+            }
+          }
+          Write-Host "All files validated successfully!" -ForegroundColor Green
+
+  build:
+    name: Build & Compile
+    runs-on: windows-2022
+    needs: syntax-check
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Cache AutoHotkey + Compiler
+        uses: actions/cache@v4
+        with:
+          path: C:\Program Files\AutoHotkey
+          key: ${{ runner.os }}-autohotkey-v2-compiler-${{ hashFiles('**/*.ahk') }}
+          restore-keys: |
+            ${{ runner.os }}-autohotkey-v2-compiler-
+            ${{ runner.os }}-autohotkey-v2-
+
+      - name: Install AutoHotkey
+        shell: powershell
+        run: |
+          if (-not (Test-Path "C:\Program Files\AutoHotkey")) {
+            Write-Host "Installing AutoHotkey..."
+            winget install AutoHotkey.AutoHotkey --disable-interactivity --accept-source-agreements --location "C:\Program Files\AutoHotkey"
+          } else {
+            Write-Host "Using cached AutoHotkey installation"
+          }
+          & "C:\Program Files\AutoHotkey\v2\AutoHotkey.exe" /version
+
+      - name: Install AutoHotkey Compiler
+        shell: powershell
+        run: |
+          Write-Host "Checking for AutoHotkey compiler..."
+          if (-not (Test-Path "C:\Program Files\AutoHotkey\Compiler\Ahk2Exe.exe")) {
+            Write-Host "Downloading AutoHotkey compiler from GitHub..."
+            $apiUrl = "https://api.github.com/repos/AutoHotkey/Ahk2Exe/releases/latest"
+            $releaseInfo = Invoke-RestMethod -Uri $apiUrl
+            $zipUrl = $releaseInfo.assets | Where-Object { $_.name -match "^Ahk2Exe.*\.zip$" } | Select-Object -First 1
+            $zipPath = "$env:TEMP\ahk2exe.zip"
+            Invoke-WebRequest -Uri $zipUrl.browser_download_url -OutFile $zipPath
+            Expand-Archive -Path $zipPath -DestinationPath "C:\Program Files\AutoHotkey" -Force
+            Remove-Item $zipPath -Force
+            Write-Host "Compiler installed successfully" -ForegroundColor Green
+          } else {
+            Write-Host "Compiler already exists" -ForegroundColor Green
+          }
+          Get-Item "C:\Program Files\AutoHotkey\Compiler\Ahk2Exe.exe"
+
+      - name: Compile AutoHotkey Script
+        shell: powershell
+        run: |
+          Write-Host "Compiling AutoHotkey script to executable..."
+          & "C:\Program Files\AutoHotkey\Compiler\Ahk2Exe.exe" /in "macOS Keymap.ahk" /out "macOS Keymap.exe" /mpress 1
+          if ($LASTEXITCODE -ne 0) {
+            Write-Error "Compilation failed! 😞"
+            exit 1
+          }
+          Write-Host "Compilation successful! 🎉" -ForegroundColor Green
+          Get-Item "macOS Keymap.exe"
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-keymap-exe-${{ github.sha }}
+          path: macOS Keymap.exe
+          retention-days: 30
