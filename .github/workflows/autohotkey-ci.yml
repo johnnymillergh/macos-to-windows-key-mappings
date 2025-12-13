@@ -16,7 +16,7 @@ on:
 jobs:
   syntax-check:
     name: Syntax Validation
-    runs-on: windows-2022
+    runs-on: windows-2025
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -43,7 +43,7 @@ jobs:
 
   build:
     name: Build & Compile
-    runs-on: windows-2022
+    runs-on: windows-2025
     needs: syntax-check
     steps:
       - name: Checkout Repository
