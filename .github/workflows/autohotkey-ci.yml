@@ -66,9 +66,15 @@ jobs:
         shell: powershell
         run: |
           Write-Host "Compiling AutoHotkey script to executable..."
-          & "C:\Program Files\AutoHotkey\Compiler\Ahk2Exe.exe" /in "macOS Keymap.ahk" /out "macOS Keymap.exe" /mpress 1
+          Write-Host "Working directory: $(Get-Location)"
+          Write-Host "Listing files..."
+          Get-ChildItem -Name *.ahk
+          Write-Host "Running Ahk2Exe compiler..."
+          $output = & "C:\Program Files\AutoHotkey\Compiler\Ahk2Exe.exe" /in "$(Get-Location)\macOS Keymap.ahk" /out "macOS Keymap.exe" /mpress 1 2>&1 | Out-String
+          Write-Host "Compiler output:"
+          Write-Host $output
           if ($LASTEXITCODE -ne 0) {
-            Write-Error "Compilation failed! 😞"
+            Write-Error "Compilation failed! 😞 Exit code: $LASTEXITCODE"
             exit 1
           }
           Write-Host "Compilation successful! 🎉" -ForegroundColor Green
