@@ -46,13 +46,15 @@ jobs:
         run: |
           Write-Host "Checking for AutoHotkey compiler..."
           if (-not (Test-Path "C:\Program Files\AutoHotkey\Compiler\Ahk2Exe.exe")) {
+            Write-Host "Creating Compiler directory..."
+            New-Item -ItemType Directory -Path "C:\Program Files\AutoHotkey\Compiler" -Force
             Write-Host "Downloading AutoHotkey compiler from GitHub..."
             $apiUrl = "https://api.github.com/repos/AutoHotkey/Ahk2Exe/releases/latest"
             $releaseInfo = Invoke-RestMethod -Uri $apiUrl
             $zipUrl = $releaseInfo.assets | Where-Object { $_.name -match "^Ahk2Exe.*\.zip$" } | Select-Object -First 1
             $zipPath = "$env:TEMP\ahk2exe.zip"
             Invoke-WebRequest -Uri $zipUrl.browser_download_url -OutFile $zipPath
-            Expand-Archive -Path $zipPath -DestinationPath "C:\Program Files\AutoHotkey" -Force
+            Expand-Archive -Path $zipPath -DestinationPath "C:\Program Files\AutoHotkey\Compiler" -Force
             Remove-Item $zipPath -Force
             Write-Host "Compiler installed successfully" -ForegroundColor Green
           } else {
