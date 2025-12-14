@@ -69,13 +69,15 @@ jobs:
           Write-Host "Working directory: $(Get-Location)"
           Write-Host "Listing files..."
           Get-ChildItem -Name *.ahk
+          Write-Host "Checking if module files exist..."
+          $inputFile = Resolve-Path "macOS Keymap.ahk"
+          Write-Host "Input file: $inputFile"
           Write-Host "Running Ahk2Exe compiler..."
-          $output = & "C:\Program Files\AutoHotkey\Compiler\Ahk2Exe.exe" /in "$(Get-Location)\macOS Keymap.ahk" /out "macOS Keymap.exe" 2>&1 | Out-String
-          Write-Host "Compiler output:"
-          Write-Host $output
-          if ($LASTEXITCODE -ne 0) {
-            Write-Error "Compilation failed! 😞 Exit code: $LASTEXITCODE"
-            exit 1
+          $process = Start-Process -FilePath "C:\Program Files\AutoHotkey\Compiler\Ahk2Exe.exe" -ArgumentList "/in", $inputFile.Path, "/out", "macOS Keymap.exe" -Wait -PassThru -NoNewWindow
+          Write-Host "Compiler exit code: $($process.ExitCode)"
+          if ($process.ExitCode -ne 0) {
+            Write-Error "Compilation failed! Exit code: $($process.ExitCode)"
+            exit $process.ExitCode
           }
           Write-Host "Compilation successful! 🎉" -ForegroundColor Green
           Get-Item "macOS Keymap.exe"
