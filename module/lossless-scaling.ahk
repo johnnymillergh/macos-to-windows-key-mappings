@@ -99,14 +99,14 @@ WindowFullScreenMonitor() {
     if (isFullScreen && !wasFullScreen) {
         Logger.Info("Full screen detected - triggering Lossless Scaling, App: " activeApp " | Title: " windowTitle,
             "Lossless Scaling")
-        ; Send Ctrl + Alt + S to activate Lossless Scaling
-        Send("^!s")
+        ; Send Ctrl + Alt + Shift + Win + S to activate Lossless Scaling
+        Send("^!+#{s}")
         wasFullScreen := true
     } else if (!isFullScreen && wasFullScreen) {
         Logger.Info("Exited full screen, deactivate Lossless Scaling, App: " activeApp " | Title: " windowTitle,
             "Lossless Scaling")
-        ; Send Ctrl + Alt + S to de-activate Lossless Scaling
-        Send("^!s")
+        ; Send Ctrl + Alt + Shift + Win + S to de-activate Lossless Scaling
+        Send("^!+#{s}")
         wasFullScreen := false
     }
 
