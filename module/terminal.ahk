@@ -29,4 +29,7 @@
 #4:: Send("^+4")
 #HotIf
 
+; Clear buffer with ⌘ + shift + k
+#+k:: Send("^+k")
+
 Logger.Info("Windows Terminal script loaded: " A_ScriptName, "Windows Terminal")
