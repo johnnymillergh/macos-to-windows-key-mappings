@@ -37,9 +37,9 @@
 #i:: Send("^i")
 ; Underline with ⌘ + u
 #u:: Send("^u")
-; Code with ⌘ + shift + `, FIXME: this doesn't work well
+; Code formatting workaround with ⌘ + shift + Delete
 #+Del:: Send("^+{Del}")
-; Strikethrough with ⌘ + shift + `
+; Strikethrough with ⌘ + control + Delete
 #^Del:: Send("^+5")
 ; Hyperlink with ⌘ + k
 #k:: Send("^k")

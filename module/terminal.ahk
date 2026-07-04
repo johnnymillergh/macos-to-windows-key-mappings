@@ -27,9 +27,9 @@
 
 ; Open Command Prompt with ⌘ + 4
 #4:: Send("^+4")
-#HotIf
 
 ; Clear buffer with ⌘ + shift + k
 #+k:: Send("^+k")
+#HotIf
 
 Logger.Info("Windows Terminal script loaded: " A_ScriptName, "Windows Terminal")

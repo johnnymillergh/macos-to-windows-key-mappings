@@ -85,7 +85,7 @@ or WinActive("ahk_exe Code.exe")
 ; Move statement down with ⌘ + shift + down
 #+Down:: Send("^+{Down}")
 
-; Code generation with ctrl + enter, FIXME: doesn't work properly
+; Code generation with ctrl + enter (known flaky; kept for existing workflow)
 ^Enter:: Send("!{Ins}")
 
 ; Copy class name or method reference with ⌘ + shift + alt + c

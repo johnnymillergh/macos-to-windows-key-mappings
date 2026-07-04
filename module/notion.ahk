@@ -47,7 +47,7 @@
 #e:: Send("^e")
 
 ; While Blocks are Selected
-; Expand the selection up or down with ⌘ + shift + left/right. FIXME: Does seem to be working
+; Expand selection up or down with ⌘ + shift + left/right (known flaky; kept for existing workflow)
 #+Left:: Send("^+{Left}")
 #+Right:: Send("^+{Right}")
 ; Open a page in a new tab with ⌘ + shift + enter

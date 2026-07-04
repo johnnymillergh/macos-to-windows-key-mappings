@@ -16,7 +16,7 @@
 ; Cut with ⌘ + x
 #x:: Send("^x")
 ; Deselect all with ⌘ + shift + a
-#^a:: Send("^+a")
+#+a:: Send("^+a")
 ; Razor with ⌘ + b
 #b:: Send("^b")
 ; Split clip with ⌘ + \
