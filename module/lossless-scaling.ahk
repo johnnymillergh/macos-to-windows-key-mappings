@@ -156,7 +156,12 @@ WindowFullScreenMonitor() {
     }
 }
 
-; Run check every 2000ms
-SetTimer(WindowFullScreenMonitor, 2000)
-
-Logger.Info("Lossless Scaling script loaded: " A_ScriptName, "Lossless Scaling")
+; Only enable detection if Lossless Scaling is installed (Steam Start Menu shortcut).
+; #Include is load-time, so the gate lives here on the timer - the module's only active behavior.
+losslessScalingShortcut := A_AppData "\Microsoft\Windows\Start Menu\Programs\Steam\Lossless Scaling.url"
+if FileExist(losslessScalingShortcut) {
+    SetTimer(WindowFullScreenMonitor, 2000)  ; Run check every 2000ms
+    Logger.Info("Lossless Scaling script loaded: " A_ScriptName, "Lossless Scaling")
+} else {
+    Logger.Info("Lossless Scaling not installed (" losslessScalingShortcut " missing) - detection disabled", "Lossless Scaling")
+}
